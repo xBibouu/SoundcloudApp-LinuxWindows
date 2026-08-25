@@ -5,6 +5,8 @@
 **SoundCloud as a real app on your computer — with your media keys, a tray icon,
 your track on Discord, and no ads.**
 
+[![Download](https://img.shields.io/github/v/release/xBibouu/SoundcloudApp-LinuxWindows?style=for-the-badge&logo=github&logoColor=white&label=Download&color=ff5500)](https://github.com/xBibouu/SoundcloudApp-LinuxWindows/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/xBibouu/SoundcloudApp-LinuxWindows/total?style=for-the-badge&logo=github&logoColor=white&label=Downloads&color=444d56)](https://github.com/xBibouu/SoundcloudApp-LinuxWindows/releases)
 [![License](https://img.shields.io/badge/License-MIT-6e7781?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
 [![Electron](https://img.shields.io/badge/Electron-2b2e3a?style=for-the-badge&logo=electron&logoColor=9feaf9)](https://www.electronjs.org/)
 [![Issues](https://img.shields.io/github/issues/xBibouu/SoundcloudApp-LinuxWindows?style=for-the-badge&logo=github&logoColor=white&color=444d56)](https://github.com/xBibouu/SoundcloudApp-LinuxWindows/issues)
@@ -57,28 +59,24 @@ panel and media widget, with the cover art, like Spotify does.
 
 ## Get it
 
-There's no ready-made download yet, so you build it once yourself. It's two
-commands and you need [Node.js](https://nodejs.org/) installed:
-
-```bash
-npm install
-npm run dist:linux     # or: npm run dist:win
-```
-
-The files land in the `dist/` folder. Take whichever suits you:
+Grab a file from the
+[latest release](https://github.com/xBibouu/SoundcloudApp-LinuxWindows/releases/latest).
 
 | File | For | How to use it |
 |---|---|---|
-| `.AppImage` | Any Linux — **easiest** | Double-click it, or `./SoundcloudAppLinuxWindows-*.AppImage` |
-| `.flatpak` | Linux, sandboxed | `flatpak install --user --bundle dist/*.flatpak` |
-| `.deb` | Ubuntu, Debian, Mint | `sudo apt install ./soundcloud-app-*.deb` |
-| `.rpm` | Fedora, openSUSE | `sudo dnf install ./soundcloud-app-*.rpm` |
+| `.AppImage` | Any Linux — **start here** | Make it executable, then run it |
+| `.flatpak` | Linux, sandboxed | `flatpak install --user --bundle <file>` |
+| `.deb` | Ubuntu, Debian, Mint | `sudo apt install ./<file>` |
 | `Setup.exe` | Windows | Run it |
 | `portable.exe` | Windows, no install | Run it |
 
 Not sure? Take the **AppImage**. It runs almost everywhere and installs nothing.
 
-Just want to try it without building? `npm install && npm start`.
+Fedora and openSUSE: there's no `.rpm` in the release, so take the AppImage or
+the Flatpak — or build one yourself with `npm run dist:linux`.
+
+The Windows binaries aren't code-signed, so SmartScreen warns you the first
+time. Every file's checksum is in `SHA256SUMS` if you want to verify it.
 
 ## Signing in
 
