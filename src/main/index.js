@@ -73,7 +73,7 @@ function clamp(text, fallback) {
 function updateDiscord(state) {
   if (!discord || !discordClientId() || !store.get('discordPresence', true)) return;
 
-  if (!state.hasTrack) {
+  if (!state.hasTrack || !state.playing) {
     if (discordKey !== 'idle') {
       discordKey = 'idle';
       discordStart = 0;
@@ -84,13 +84,11 @@ function updateDiscord(state) {
 
   const duration = Math.round(state.duration || 0);
   const start =
-    state.playing && duration > 1
-      ? Date.now() - Math.floor((state.position || 0) * 1000)
-      : 0;
+    duration > 1 ? Date.now() - Math.floor((state.position || 0) * 1000) : 0;
 
   const drifted = start && discordStart && Math.abs(start - discordStart) > 2500;
 
-  const key = `${state.title}|${state.artist}|${state.playing}|${duration}`;
+  const key = `${state.title}|${state.artist}|${duration}`;
   if (key === discordKey && !drifted) return;
   discordKey = key;
   discordStart = start;
