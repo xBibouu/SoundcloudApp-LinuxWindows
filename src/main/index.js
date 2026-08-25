@@ -44,7 +44,7 @@ let discordKey = '';
 let discordStart = 0;
 
 const DEFAULT_DISCORD_CLIENT_ID = '1090770350251458592';
-const INSTALL_URL = 'https://soundcloud.com';
+const INSTALL_URL = 'https://github.com/xBibouu/SoundcloudApp-LinuxWindows/releases/latest';
 
 function discordClientId() {
   return (
@@ -62,7 +62,7 @@ function setupDiscord() {
   if (id && store.get('discordPresence', true)) discord.connect();
 }
 
-const DISCORD_BUTTON_LABEL = "Installer l'application".slice(0, 32);
+const DISCORD_BUTTON_LABEL = "Installer l'App".slice(0, 32);
 
 function clamp(text, fallback) {
   const value = (text || '').trim() || fallback;
