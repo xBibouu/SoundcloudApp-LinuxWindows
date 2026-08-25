@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.log
+
+# Editor / IDE
+.idea/
+.vscode/
+
+# Local build + runtime state
+.flatpak-builder/
+*.xwd

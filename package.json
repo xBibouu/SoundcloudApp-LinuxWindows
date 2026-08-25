@@ -1,0 +1,146 @@
+{
+  "name": "soundcloud-app-linux-windows",
+  "productName": "SoundcloudAppLinuxWindows",
+  "version": "0.1.0",
+  "description": "Unofficial SoundCloud desktop client for Linux and Windows",
+  "main": "src/main/index.js",
+  "author": "xBibouu <147165052+xBibouu@users.noreply.github.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "icons": "node scripts/make-icons.js && node scripts/make-ico.js",
+    "dist": "electron-builder --linux AppImage deb rpm flatpak --win nsis portable",
+    "dist:dir": "electron-builder --linux dir",
+    "fix-sandbox": "sudo chown root:root node_modules/electron/dist/chrome-sandbox && sudo chmod 4755 node_modules/electron/dist/chrome-sandbox",
+    "start:nosandbox": "electron . --no-sandbox",
+    "dist:flatpak": "electron-builder --linux flatpak",
+    "dist:linux": "electron-builder --linux AppImage deb rpm flatpak",
+    "dist:win": "electron-builder --win nsis portable",
+    "checksums": "node scripts/checksums.js"
+  },
+  "devDependencies": {
+    "acorn": "^8.18.0",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "io.github.gato.soundcloud",
+    "productName": "SoundcloudAppLinuxWindows",
+    "files": [
+      "src/**/*",
+      "build/icons/**/*",
+      "build/icon.ico",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm",
+        "flatpak"
+      ],
+      "category": "AudioVideo;Audio;Player",
+      "icon": "build/icons",
+      "maintainer": "xBibouu <147165052+xBibouu@users.noreply.github.com>",
+      "desktop": {
+        "Name": "SoundcloudAppLinuxWindows",
+        "Comment": "Listen to SoundCloud",
+        "Keywords": "music;audio;player;stream;soundcloud;",
+        "StartupWMClass": "SoundCloud"
+      }
+    },
+    "flatpak": {
+      "runtimeVersion": "24.08",
+      "baseVersion": "24.08",
+      "license": "LICENSE",
+      "finishArgs": [
+        "--share=ipc",
+        "--socket=x11",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--socket=pulseaudio",
+        "--share=network",
+        "--device=dri",
+        "--talk-name=org.freedesktop.Notifications",
+        "--talk-name=org.kde.StatusNotifierWatcher",
+        "--own-name=org.mpris.MediaPlayer2.soundcloud",
+        "--filesystem=~/snap/chromium/common/chromium:ro",
+        "--filesystem=~/.config/chromium:ro",
+        "--filesystem=~/.var/app/org.chromium.Chromium/config/chromium:ro",
+        "--filesystem=~/.config/google-chrome:ro",
+        "--filesystem=~/.config/google-chrome-beta:ro",
+        "--filesystem=~/.config/google-chrome-unstable:ro",
+        "--filesystem=~/.var/app/com.google.Chrome/config/google-chrome:ro",
+        "--filesystem=~/.config/BraveSoftware:ro",
+        "--filesystem=~/.var/app/com.brave.Browser/config/BraveSoftware:ro",
+        "--filesystem=~/.config/vivaldi:ro",
+        "--filesystem=~/.var/app/com.vivaldi.Vivaldi/config/vivaldi:ro",
+        "--filesystem=~/.config/opera:ro",
+        "--filesystem=~/.config/opera-gx:ro",
+        "--filesystem=~/.config/microsoft-edge:ro",
+        "--filesystem=~/.var/app/com.microsoft.Edge/config/microsoft-edge:ro",
+        "--filesystem=~/.config/yandex-browser:ro",
+        "--filesystem=~/.mozilla:ro",
+        "--filesystem=~/snap/firefox/common/.mozilla:ro",
+        "--filesystem=~/.var/app/org.mozilla.firefox/.mozilla:ro",
+        "--filesystem=~/.zen:ro",
+        "--filesystem=~/.config/zen:ro",
+        "--filesystem=~/.var/app/app.zen_browser.zen/.zen:ro",
+        "--filesystem=~/.librewolf:ro",
+        "--filesystem=~/.var/app/io.gitlab.librewolf-community/.librewolf:ro",
+        "--filesystem=~/.waterfox:ro",
+        "--filesystem=~/.floorp:ro",
+        "--filesystem=~/.var/app/one.ablaze.floorp/.floorp:ro",
+        "--filesystem=~/.tb/tor-browser:ro",
+        "--talk-name=org.freedesktop.Flatpak",
+        "--filesystem=xdg-run/discord-ipc-0",
+        "--filesystem=xdg-run/discord-ipc-1",
+        "--filesystem=xdg-run/snap.discord",
+        "--filesystem=xdg-run/app/com.discordapp.Discord"
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "SoundcloudAppLinuxWindows",
+      "artifactName": "${productName}-${version}-x64-Setup.exe"
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-x64-portable.exe"
+    }
+  },
+  "homepage": "https://github.com/xBibouu/SoundcloudApp-LinuxWindows#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xBibouu/SoundcloudApp-LinuxWindows.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xBibouu/SoundcloudApp-LinuxWindows/issues"
+  },
+  "dependencies": {
+    "@xhayper/discord-rpc": "^1.3.4",
+    "dbus-next": "^0.9.2",
+    "sql.js": "^1.14.2"
+  }
+}

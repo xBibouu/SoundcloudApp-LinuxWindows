@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'" />
+    <style>
+      :root { color-scheme: dark; }
+      body {
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: #1a1a1b;
+        color: #eee;
+        padding: 20px;
+      }
+      h1 { font-size: 15px; margin: 0 0 6px; }
+      p { font-size: 12px; color: #aaa; margin: 0 0 14px; line-height: 1.5; }
+      a { color: #ff7a29; }
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 9px 10px;
+        font-size: 13px;
+        border: 1px solid #444;
+        border-radius: 6px;
+        background: #111;
+        color: #fff;
+        outline: none;
+      }
+      input:focus { border-color: #ff7a29; }
+      .row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+      button {
+        padding: 8px 16px;
+        font-size: 13px;
+        border: 0;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .cancel { background: #333; color: #ddd; }
+      .ok { background: #ff5500; color: #fff; }
+    </style>
+  </head>
+  <body>
+    <h1>Discord Application ID</h1>
+    <p>
+      Create a free app at
+      <a>discord.com/developers/applications</a>, name it "SoundCloud", copy its
+      Application ID and paste it here. Its name is what shows as "Listening to …".
+    </p>
+    <input id="field" type="text" inputmode="numeric" placeholder="e.g. 1181234567890123456" autofocus />
+    <div class="row">
+      <button class="cancel" id="cancel">Cancel</button>
+      <button class="ok" id="ok">Save</button>
+    </div>
+    <script>
+      const field = document.getElementById('field');
+      window.promptAPI.initial().then((v) => {
+        if (v) field.value = v;
+        field.focus();
+        field.select();
+      });
+      const submit = () => window.promptAPI.submit(field.value.trim());
+      document.getElementById('ok').addEventListener('click', submit);
+      document.getElementById('cancel').addEventListener('click', () => window.promptAPI.cancel());
+      field.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') submit();
+        if (e.key === 'Escape') window.promptAPI.cancel();
+      });
+    </script>
+  </body>
+</html>
